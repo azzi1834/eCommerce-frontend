@@ -1,0 +1,119 @@
+import axios from "axios";
+import { TYPES } from "./authTypes";
+import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
+
+// Action creator to initiate the register request
+export const registerRequest = () => ({
+  type: TYPES.REGISTER_REQUEST,
+});
+
+// Action creator for successful register
+export const registerSuccess = (userData) => ({
+  type: TYPES.REGISTER_SUCCESS,
+  payload: userData,
+});
+
+// Action creator for register failure
+export const registerFailure = (error) => ({
+  type: TYPES.REGISTER_FAIL,
+  payload: error,
+});
+
+export const loginRequest = () => ({
+  type: TYPES.LOGIN_REQUEST,
+});
+
+// Action creator for successful login
+export const loginSuccess = (userData) => ({
+  type: TYPES.LOGIN_SUCCESS,
+  payload: userData,
+});
+
+// Action creator for login failure
+export const loginFailure = (error) => ({
+  type: TYPES.LOGIN_FAIL,
+  payload: error,
+});
+
+// Action creator for user logout
+export const logout = () => ({
+  type: TYPES.LOGOUT,
+});
+
+// Async action creator for user registration
+export const register = (formData) => {
+  // const navigate = useNavigate();
+  return async (dispatch) => {
+    dispatch(registerRequest());
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/register",
+        {
+          body: formData,
+        }
+      );
+
+      localStorage.setItem("token", response?.data?.token);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Registration failed");
+      }
+
+      const userData = await response.json();
+      dispatch(registerSuccess(userData));
+
+      return {
+        status: 200,
+        messsage: "user register successfully",
+      };
+
+      // navigate("/login");
+    } catch (error) {
+      dispatch(registerFailure(error.message));
+    }
+  };
+};
+
+export const login = (formData) => {
+  return async (dispatch) => {
+    dispatch(loginRequest());
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/login",
+        {
+          body: formData,
+        }
+      );
+      console.log("response", response);
+
+      localStorage.setItem("token", response?.data?.token);
+
+      if (response.status !== 200) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Login failed");
+      }
+      dispatch(loginSuccess(response));
+
+      return {
+        status: 200,
+        messsage: "user login successfully",
+      };
+    } catch (error) {
+      dispatch(loginFailure(error.message));
+    }
+  };
+};
+
+export const userLogout = () => {
+  return async (dispatch) => {
+    dispatch(logout());
+    const navigate = useNavigate();
+
+    localStorage.removeItem("token");
+    navigate("/login", { replace: true });
+  };
+};
