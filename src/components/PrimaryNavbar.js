@@ -8,14 +8,15 @@ import {
   Container,
   NavDropdown,
 } from "react-bootstrap";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsCart, BsPersonCircle } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../actions/authActions";
 
 const PrimaryNavbar = () => {
-  const isLoggedIn = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
+
   // const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,6 +25,8 @@ const PrimaryNavbar = () => {
     localStorage.removeItem("token");
     navigate("/login", { replace: true });
   };
+
+  useEffect(() => {}, [user]);
 
   return (
     <Navbar className="bg-body-tertiary">
@@ -53,7 +56,7 @@ const PrimaryNavbar = () => {
             </a>
           </Navbar.Text>
 
-          {!isLoggedIn ? (
+          {!user ? (
             <Navbar.Text>
               <Link to="/register" className="btn btn-outline">
                 {/* <VscAccount /> */}

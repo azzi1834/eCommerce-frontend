@@ -2,7 +2,7 @@ import React from "react";
 import Products from "./Products";
 
 function Home() {
-  console.log("process.env", process.env);
+  // console.log("process.env", process.env);
   return (
     <>
       <Products />

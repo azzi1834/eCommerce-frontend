@@ -32,13 +32,16 @@ function Products() {
                     style={{ width: "15rem" }}
                   >
                     <Card.Img
+                      style={{ objectFit: "cover" }}
                       variant="top"
                       src={`http://localhost:4000/${dta.images[0]}`}
+                      height={"250px"}
+                      width={"auto"}
                     />
                     <Card.Body>
-                      <Card.Title>{dta?.dataValues?.name}</Card.Title>
-                      <Card.Text>{dta?.dataValues?.price}</Card.Text>
-
+                      <Card.Title>
+                        <p>{dta?.dataValues?.name}</p>
+                      </Card.Title>
                       <Link
                         to={`/products/${dta?.dataValues?.id}`}
                         className="btn btn-primary"
