@@ -1,59 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import Profile from "./personalDetails";
+import AddressBook from "./AddressBook";
 
 function Dashboard() {
-  const user = useSelector((state) => state.auth.user);
-  console.log("user", user);
+  const [comp, setComp] = useState("");
+
+  // Function to handle button clicks and set 'comp' state
+  const handleButtonClick = (functionality) => {
+    setComp(functionality);
+  };
 
   return (
     <>
-      {/* <div className="dashboard container border row">
-        <div className="col-3 border p-3">
-          <h5>Manage My Account</h5>
-          <div>Upload-Image</div>
-          <div>Update-Password</div>
-          <div>Add Address</div>
-        </div>
-        <div className="col-9 border p-3">
-          <h3>Welcome {user.data.dataValues.firstName}</h3>
-        </div>
-      </div> */}
-      <div className="container-fluid p-5">
+      <div className="container-fluid p-5 border">
         <div className="row">
-          {/* Sidebar */}
-          <nav
-            id="sidebar"
-            className="col-md-3 col-lg-2 d-md-block bg-light sidebar"
-          >
-            <div className="position-sticky">
-              <ul className="nav flex-column">
-                <li className="nav-item">
-                  <Link className="nav-link active" to="/dashboard">
-                    Dashboard
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/profile">
-                    Profile
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/orders">
-                    Orders
-                  </Link>
-                </li>
-                {/* Add more navigation links here */}
-              </ul>
+          <div className="col-3 border">
+            <h5> Manage My Account </h5>
+            <div>
+              <button onClick={() => handleButtonClick("profile")}>
+                My Profile
+              </button>
+              <br />
+              <button onClick={() => handleButtonClick("uploadProfilePic")}>
+                Upload Profile Pic
+              </button>
+              <br />
+              <button onClick={() => handleButtonClick("resetPassword")}>
+                Reset Password
+              </button>
+              <br />
+              <button onClick={() => handleButtonClick("addressBook")}>
+                Address Book
+              </button>
+              <br />
+              <button onClick={() => handleButtonClick("paymentMethods")}>
+                Payment Methods
+              </button>
             </div>
-          </nav>
+          </div>
 
-          {/* Main content */}
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            {/* Your dashboard content goes here */}
-            <h3>Welcome to your dashboard</h3>
-            {/* Add your dashboard components and content here */}
-          </main>
+          <div className="col-9">
+            {(() => {
+              switch (comp) {
+                case "profile":
+                  return <Profile />;
+
+                case "addressBook":
+                  return <AddressBook />;
+
+                // Add cases for other functionalities here
+
+                default:
+                  return null;
+              }
+            })()}
+          </div>
         </div>
       </div>
     </>

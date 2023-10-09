@@ -1,0 +1,20 @@
+.addAddress{
+    border: 0.5px solid black;
+    border-style: dashed;
+    padding: 1rem;
+}
+
+.addAddress :hover{
+    background-color: blue;
+    color: white;
+}
+
+.addAddress p{
+    margin-bottom: 0px;
+    font-weight: bold;
+    color: blue;
+}
+.iconSize{
+    height: 20px;
+    width: 20px;
+}

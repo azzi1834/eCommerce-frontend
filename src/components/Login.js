@@ -5,6 +5,18 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import * as Yup from "yup";
+
+const loginSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+    )
+    .required("Required"),
+});
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -40,7 +52,7 @@ const Login = () => {
         }
       );
       if (user && user?.status === 200) {
-        navigate("/dashboard", { replace: true });
+        navigate("/", { replace: true });
       }
     }
   };
@@ -50,23 +62,22 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="container w-25 mt-3">
-      <h2>Login</h2>
-      {error && <p className="error">{error}</p>}
+    <div className="container w-25 mt-3 border bg-white p-4">
+      <h4 className="text-center ">Sign In</h4>
+
+      {/* {error && <p className="error">{error}</p>} */}
       <Formik
         initialValues={{
           email: "",
           password: "",
         }}
-        validate={handleValidate}
+        validationSchema={loginSchema}
         onSubmit={(values) => {
           console.log("before::", values);
-          dispatch(login(values)).then(
-            navigate("/dashboard", { replace: true })
-          );
+          dispatch(login(values)).then(navigate("/", { replace: true }));
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <Form>
             <Field
               type="email"
@@ -74,7 +85,9 @@ const Login = () => {
               placeholder="Enter email address"
               className="form-control"
             />
-            <ErrorMessage name="email" component="div" />
+            {errors.email && touched.email ? (
+              <small style={{ color: "red" }}>{errors.email}</small>
+            ) : null}
             <br />
 
             <Field
@@ -83,22 +96,28 @@ const Login = () => {
               placeholder="Enter Password"
               className="form-control"
             />
-            <ErrorMessage name="password" component="div" />
+            {errors.password && touched.password ? (
+              <small style={{ color: "red" }}>{errors.password}</small>
+            ) : null}
+
             <br />
 
             <button
-              className="btn btn-primary"
+              className="btn btn-primary w-100"
               type="submit"
               disabled={isSubmitting}
+              style={{ backgroundColor: "#0046BE" }}
             >
               Submit
             </button>
 
-            <p className="my-2">
-              Not have an account?
+            <hr />
+
+            <p className="my-3" style={{ fontSize: "15px" }}>
+              <b>Don't have an account?</b>{" "}
               <span>
-                <Link to="/register" className="btn btn-dark">
-                  Register
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  Create an account
                 </Link>
               </span>
             </p>

@@ -3,14 +3,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../actions/authActions";
 import { Formik, Form, Field, ErrorMessage, replace } from "formik";
 import axios from "axios";
+import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
+
+const registrationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, "Too Short")
+    .max(50, "Too Long!")
+    .required("Required"),
+
+  lastName: Yup.string()
+    .min(2, "Too Short")
+    .max(50, "Too Long!")
+    .required("Required"),
+
+  email: Yup.string().email("Invalid email").required("Required"),
+
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+    )
+    .required("Required"),
+});
 
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loading = useSelector((state) => state.auth.loading);
-  const error = useSelector((state) => state.auth.error);
+  const { loading, error, user } = useSelector((state) => state.auth);
+
+  if (!user && !error) {
+    navigate("/login");
+  }
 
   const verifyToken = async () => {
     const token = localStorage.getItem("token");
@@ -32,36 +58,15 @@ const Registration = () => {
   };
 
   useEffect(() => {
-    verifyToken();
+    // verifyToken();
     // dispatch(verifyToken());
   });
 
-  const handleValidate = (values) => {
-    const errors = {};
-    if (!values.firstName) {
-      errors.firstName = "Required";
-    }
-
-    if (!values.lastName) {
-      errors.lastName = "Required";
-    }
-
-    if (!values.email) {
-      errors.email = "Required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
-    }
-    if (!values.password) {
-      errors.password = "Required";
-    }
-    return errors;
-  };
-
   return (
     <>
-      <div className="container p-2 mt-3 mb-3 w-25">
-        <h2 className="mb-3">Registration</h2>
-        {error && <p className="error">{error}</p>}
+      <div className="container-fluid w-25 mt-3 border bg-white p-4">
+        <h4 className="text-center">Create an Account</h4>
+        {/* {error && <p className="error">{error}</p>} */}
         <Formik
           initialValues={{
             firstName: "",
@@ -69,15 +74,18 @@ const Registration = () => {
             email: "",
             password: "",
           }}
-          validate={handleValidate}
-          onSubmit={(values) => {
-            // console.log("before::", values);
-            dispatch(register(values)).then(
-              navigate("/login", { replace: true })
-            );
+          validationSchema={registrationSchema}
+          onSubmit={(values, action) => {
+            console.log("values onsubmit::", values);
+            // dispatch(register(values)).then(
+            //   navigate("/login", { replace: true })
+            // );
+
+            dispatch(register(values));
+            action.resetForm();
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, errors, touched }) => (
             <Form>
               <Field
                 type="text"
@@ -85,7 +93,10 @@ const Registration = () => {
                 placeholder="Enter your first Name"
                 className="form-control"
               />
-              <ErrorMessage name="firstName" component="div" />
+
+              {errors.firstName && touched.firstName ? (
+                <small style={{ color: "red" }}>{errors.firstName}</small>
+              ) : null}
               <br />
               <Field
                 type="text"
@@ -93,7 +104,10 @@ const Registration = () => {
                 placeholder="Enter your last Name"
                 className="form-control"
               />
-              <ErrorMessage name="lastName" component="div" />
+
+              {errors.lastName && touched.lastName ? (
+                <small style={{ color: "red" }}>{errors.lastName}</small>
+              ) : null}
               <br />
 
               <Field
@@ -102,7 +116,10 @@ const Registration = () => {
                 placeholder="Enter email address"
                 className="form-control"
               />
-              <ErrorMessage name="email" component="div" />
+
+              {errors.email && touched.email ? (
+                <small style={{ color: "red" }}>{errors.email}</small>
+              ) : null}
               <br />
 
               <Field
@@ -111,21 +128,26 @@ const Registration = () => {
                 placeholder="Enter Password"
                 className="form-control"
               />
-              <ErrorMessage name="password" component="div" />
+
+              {errors.password && touched.password ? (
+                <small style={{ color: "red" }}>{errors.password}</small>
+              ) : null}
               <br />
 
               <button
-                className="btn btn-primary"
+                className="btn w-100 btn-primary"
                 type="submit"
                 disabled={isSubmitting}
+                style={{ backgroundColor: "#0046BE" }}
               >
                 Submit
               </button>
 
-              <p className="my-2">
-                Already have an account?
+              <hr />
+              <p className="my-3" style={{ fontSize: "15px" }}>
+                <b>Already have an account?</b>{" "}
                 <span>
-                  <Link to="/login" className="btn btn-dark">
+                  <Link to="/login" style={{ textDecoration: "none" }}>
                     Login
                   </Link>
                 </span>
@@ -133,6 +155,7 @@ const Registration = () => {
             </Form>
           )}
         </Formik>
+        {error && <p className="error">{error}</p>}
       </div>
     </>
   );

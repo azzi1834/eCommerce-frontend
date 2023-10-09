@@ -1,7 +1,6 @@
 import axios from "axios";
 import { TYPES } from "./authTypes";
 import { useNavigate } from "react-router";
-// import { useNavigate } from "react-router";
 
 // Action creator to initiate the register request
 export const registerRequest = () => ({
@@ -43,35 +42,38 @@ export const logout = () => ({
 
 // Async action creator for user registration
 export const register = (formData) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate;
+
   return async (dispatch) => {
     dispatch(registerRequest());
-
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/auth/register",
-        {
+      console.log("before hitting request");
+      await axios
+        .post("http://localhost:4000/api/auth/register", {
           body: formData,
-        }
-      );
+        })
+        .then((response) => {
+          console.log("response::", response);
+        })
+        .catch((error) => {
+          console.log("error::", error);
+          console.log("error::", error.message);
+          console.log("error::", error.response.request.status);
+        });
 
-      localStorage.setItem("token", response?.data?.token);
+      // localStorage.setItem("token", response?.data?.token);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Registration failed");
-      }
+      // const errorData = response;
+      // throw new Error(errorData.message || "Login failed");
 
-      const userData = await response.json();
-      dispatch(registerSuccess(userData));
-
-      return {
-        status: 200,
-        messsage: "user register successfully",
-      };
-
-      // navigate("/login");
+      // if (response.status === 200) {
+      // dispatch(registerSuccess(response));
+      // } else {
+      //   dispatch(registerFailure("REGISTRATION FAILED TRY AGAIN!"));
+      //   // throw new Error(response.message || "REGISTER failed");
+      // }
     } catch (error) {
+      console.log("error", error);
       dispatch(registerFailure(error.message));
     }
   };
@@ -111,9 +113,9 @@ export const login = (formData) => {
 export const userLogout = () => {
   return async (dispatch) => {
     dispatch(logout());
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     localStorage.removeItem("token");
-    navigate("/login", { replace: true });
+    // navigate("/login", { replace: true });
   };
 };

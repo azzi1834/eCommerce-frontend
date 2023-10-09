@@ -1,101 +1,151 @@
-import {
-  Col,
-  Row,
-  Button,
-  Form,
-  Nav,
-  Navbar,
-  Container,
-  NavDropdown,
-} from "react-bootstrap";
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { BsCart, BsPersonCircle } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../actions/authActions";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import React, { useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { BsCart } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import logo from "../assets/logo.png";
+import Search from "./Search";
+import axios from "axios";
+import { Formik, Form, Field } from "formik";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const PrimaryNavbar = () => {
-  const user = useSelector((state) => state.auth.user);
+  const isTokenFound = localStorage.getItem("token");
+  const { isLogin } = useSelector((state) => state.auth);
 
-  // const dispatch = useDispatch();
+  const searchProducts = (values) => {
+    axios
+      .post("http://localhost:4000/api/product/search", { search: values })
+      .then((response) => {
+        // console.log("response", response);
+        navigate("/search", { state: response?.data });
+      });
+  };
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // dispatch(userLogout()); // Dispatch the logout action
     localStorage.removeItem("token");
-    navigate("/login", { replace: true });
+    navigate("/", { replace: true });
   };
 
-  useEffect(() => {}, [user]);
-
   return (
-    <Navbar className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand>
-          <Link to="/">LOGO</Link>
-        </Navbar.Brand>
-        <Form inline>
-          <Row>
-            <Col xs="auto">
-              <Form.Control
-                type="text"
-                placeholder="Search"
-                className=" mr-sm-2"
-              />
-            </Col>
-            <Col xs="auto">
-              <Button type="submit">Search</Button>
-            </Col>
-          </Row>
-        </Form>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            <a href="#" className="btn btn-outline">
-              <BsCart /> Cart(0)
-            </a>
-          </Navbar.Text>
-
-          {!user ? (
-            <Navbar.Text>
-              <Link to="/register" className="btn btn-outline">
-                {/* <VscAccount /> */}
-                <BsPersonCircle />
-                Account
+    <>
+      <Navbar style={{ height: "5rem", backgroundColor: "#0046BE" }}>
+        <div className="container d-flex justify-content-between ">
+          <div className="d-flex">
+            <div className="">
+              <Link to="/">
+                <img
+                  src={logo}
+                  alt="LOGO"
+                  style={{ height: "auto", width: "50%" }}
+                />
               </Link>
-            </Navbar.Text>
-          ) : (
-            <div>
-              <Nav className="ms-auto">
-                <NavDropdown
-                  className="justify-content-end"
-                  title={
-                    <img
-                      className="thumbnail-image"
-                      alt="Profile"
-                      src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1692939966~exp=1692940566~hmac=9ba5c7ac0ed2b565e7093a76c277f10ee08ceb4871ae311584123810d4e0a2e6"
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "50%",
-                      }}
-                    />
-                  }
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item className="border-bottom">
-                    Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={handleLogout}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
             </div>
-          )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+
+            <div>
+              <Formik
+                initialValues={{ keyword: "" }}
+                onSubmit={(values) => {
+                  searchProducts(values.keyword);
+                }}
+              >
+                <Form>
+                  <Field
+                    type="text"
+                    name="keyword"
+                    placeholder="Enter keyword"
+                    style={{
+                      height: "2.5rem",
+                      padding: "0px 0px 0px 15px",
+                      marginTop: "5%",
+                      border: "0px",
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    style={{
+                      color: "black",
+                      height: "2.5rem",
+                      backgroundColor: "white",
+                      outline: "none",
+                      border: "0px",
+                      padding: "0px 10px 0px 10px",
+                    }}
+                  >
+                    <AiOutlineSearch
+                      style={{ height: "20px", width: "20px" }}
+                    />
+                  </button>
+                </Form>
+              </Formik>
+            </div>
+          </div>
+
+          <div className="d-flex">
+            <a href="#" className="btn btn-outline">
+              <BsCart
+                style={{ height: "25px", width: "25px", color: "white" }}
+              />
+            </a>
+
+            {!isTokenFound || !isLogin ? (
+              <div className="text-white">
+                <Link
+                  to="/register"
+                  className="btn btn-outline "
+                  style={{ color: "white" }}
+                >
+                  Register
+                </Link>
+                {"|"}
+                <Link
+                  to="/login"
+                  className="btn btn-outline"
+                  style={{ color: "white" }}
+                >
+                  Login
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <Nav className="ms-auto">
+                  <NavDropdown
+                    className="justify-content-end"
+                    title={
+                      <img
+                        className="thumbnail-image"
+                        alt="Profile"
+                        src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1692939966~exp=1692940566~hmac=9ba5c7ac0ed2b565e7093a76c277f10ee08ceb4871ae311584123810d4e0a2e6"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    }
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item className="border-bottom">
+                      <Link
+                        to="/dashboard"
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        Dashboard
+                      </Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleLogout}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </div>
+            )}
+          </div>
+        </div>
+      </Navbar>
+    </>
   );
 };
 

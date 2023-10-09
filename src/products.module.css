@@ -1,0 +1,66 @@
+.bestDeals{
+    margin: 70px 0px 100px 0px !important;
+}
+.bestDealsLogo{
+    height: 50px;
+    width: 100px;
+
+}
+
+@media only screen and (max-width:600px) {
+    .bestDealsLogo{
+        display: none;
+        /* border:1px solid whitesmoke */
+    }
+    
+}
+
+@media only screen and (max-width:600px) {
+    .bestDeals img{
+        font-size: small;
+    }
+    .bestDeals h3{
+        font-size: medium;
+    }
+    .bestDeals p{
+        font-size: small;
+    }
+    .bestDeals img{
+        height: 8rem;
+    }
+    
+}
+
+
+@media only screen and (min-width: 600px) {
+    
+    .bestDeals h3{
+        font-size: 18px;
+    }
+    .bestDeals p{
+        font-size: 14px;
+    }
+    .bestDeals img{
+        height: 10rem;
+    }
+    .bestDealsLogo{
+        height: 100px !important;
+    }
+}
+@media only screen and (min-width: 768px) {
+    
+    .bestDeals h3{
+        font-size: 28px;
+    }
+    .bestDeals p{
+        font-size: 18px;
+    }
+    .bestDeals img{
+        height: 18rem;
+    }
+    .bestDealsLogo{
+        height: 100px !important;
+    }
+}
+
+
