@@ -7,17 +7,17 @@ function AffilateProgram() {
         className="row"
         style={{ backgroundColor: "#0046BE", color: "white" }}
       >
-        <div className="col-6 p-3">
+        <div className="col-6 p-5">
           <h3>
-            <b>Join the Best Buy affiliate program.</b>
+            <b>Join the XYZ affiliate program.</b>
           </h3>
           <p>
             We make it simple to start earning money by directing your visitors
-            to BestBuy.com.
+            to xyz.com.
           </p>
         </div>
       </div>
-      <h5 className="mt-3">Why become a Best Buy affiliate?</h5>
+      <h5 className="mt-3">Why become a XYZ affiliate?</h5>
       <div className="my-3 d-flex">
         <hr />
 
@@ -26,7 +26,7 @@ function AffilateProgram() {
             <b>Earn money.</b>
           </p>
           <p>
-            Every time you drive your visitors to BestBuy.com and they make a
+            Every time you drive your visitors to xyz.com and they make a
             qualifying purchase, you earn a commission.
           </p>
         </div>
@@ -55,11 +55,11 @@ function AffilateProgram() {
       <div className="row my-5">
         <div className="col-6 text-center">
           <h4>Contact us and get help</h4>
-          <p>Email: BBY_Affiliate@bestbuy.com</p>
+          <p>Email: BBY_Affiliate@xyz.com</p>
         </div>
         <div className="col-6 text-center  ">
           <h4>Frequently asked questions</h4>
-          <p>Email: BBY_Affiliate@bestbuy.com</p>
+          <p>Email: BBY_Affiliate@xyz.com</p>
         </div>
       </div>
     </div>

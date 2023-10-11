@@ -4,7 +4,7 @@ import corporates from "../assets/corporates.png";
 function Education() {
   return (
     <div className="container my-4 p-3">
-      <h3>Best Buy Education</h3>
+      <h3>XYZ Education</h3>
 
       <div className="row p-4 border">
         <div className="col-5">
@@ -18,8 +18,8 @@ function Education() {
           <h2 className="mt-3">Let's talk about what's possible.</h2>
           <p>
             Creating an end-to-end tech solution for a school can be a daunting
-            task. That's why Best Buy Education is here to help with everything
-            from planning and installation to ongoing tech support. Contact a
+            task. That's why xyz Education is here to help with everything from
+            planning and installation to ongoing tech support. Contact a
             dedicated Education Account Manager to get started and customize a
             complete solution for your school.
           </p>
@@ -41,9 +41,9 @@ function Education() {
             clients and who will be dedicated to your account. They'll help you
             choose from thousands of education-grade products and give you
             options for how to best configure your classrooms and common areas.
-            Once installation begins, they'll work with Best Buy Project
-            Managers to make sure your project goes smoothly and that you
-            receive daily updates and customized reporting.{" "}
+            Once installation begins, they'll work with xyz Project Managers to
+            make sure your project goes smoothly and that you receive daily
+            updates and customized reporting.{" "}
           </p>
         </div>
       </div>
@@ -51,10 +51,10 @@ function Education() {
         <div className="col-7 p-2">
           <h3>A true end-to-end solution.</h3>
           <p>
-            Best Buy Education saves you from having to work with multiple
-            vendors, as we can truly do it all. Geek Squad® Agents can customize
-            your new devices, install apps and provide asset tagging so students
-            are ready to learn from day one. At your school, our unmatched
+            xyz Education saves you from having to work with multiple vendors,
+            as we can truly do it all. Geek Squad® Agents can customize your new
+            devices, install apps and provide asset tagging so students are
+            ready to learn from day one. At your school, our unmatched
             combination of space planning, technology and installation expertise
             will create the modern learning environments and virtual
             capabilities you're hoping for.
@@ -72,12 +72,12 @@ function Education() {
         <div className="col-7 p-2">
           <h3>All of the devices your students and staff need.</h3>
           <p>
-            Using the power of Best Buy's product assortment, we offer great
-            prices on thousands of the latest education-grade devices from the
-            world's premium tech brands. Work one-to-one with your Account
-            Manager to select a suite of products that fits your needs and
-            budget. We can even customize Chromebooks, laptops and tablets to
-            your specifications.
+            Using the power of xyz's product assortment, we offer great prices
+            on thousands of the latest education-grade devices from the world's
+            premium tech brands. Work one-to-one with your Account Manager to
+            select a suite of products that fits your needs and budget. We can
+            even customize Chromebooks, laptops and tablets to your
+            specifications.
           </p>
         </div>
       </div>

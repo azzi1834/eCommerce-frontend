@@ -14,7 +14,7 @@ function SupportCenter() {
   return (
     <>
       <div className="container p-4">
-        <h2>Best Buy Support</h2>
+        <h2>xyz Support</h2>
         <p>
           <b>Sign in</b> for faster, better support
         </p>

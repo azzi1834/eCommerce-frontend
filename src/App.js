@@ -24,6 +24,7 @@ import AffilateProgram from "./components/AffilateProgram";
 import Developers from "./components/Developers";
 import Health from "./components/Health";
 import Education from "./components/Education";
+import Cart from "./components/CartPage";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<Product />} />
-        <Route path="/dashboard" element={<UserDashboardLayout />}>
+        <Route path="/user" element={<UserDashboardLayout />}>
           <Route index element={<Profile />} />
           <Route path="profile" element={<Profile />} />
           <Route path="addresses" element={<Addresses />} />
@@ -57,6 +58,8 @@ function App() {
         <Route path="/health" element={<Health />}></Route>
         <Route path="/developers" element={<Developers />}></Route>
         <Route path="/education" element={<Education />}></Route>
+
+        <Route path="/cart" element={<Cart />}></Route>
       </Routes>
 
       <Footer />

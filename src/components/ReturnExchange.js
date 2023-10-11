@@ -12,8 +12,8 @@ function ReturnExchange() {
           <div className="p-3 mx-2 border rounded">
             <h5>Return it to a store</h5>
             <p>
-              Return any in-store or online purchase to any Best Buy store. Find
-              a store
+              Return any in-store or online purchase to any xyz store. Find a
+              store
             </p>
           </div>
           <div className="  p-3 mx-2 border rounded">
@@ -51,17 +51,15 @@ function ReturnExchange() {
           If you want to return or exchange your purchase, please know that the
           time period begins the day you receive your product and applies to
           new, clearance, open-box, refurbished and pre-owned products. This
-          policy applies to purchases from Best Buy, Best Buy Outlet, Pacific
-          Sales, Pacific Sales® Outlet, Magnolia® Design Center, Best Buy
-          Education and Best Buy Business.
+          policy applies to purchases from xyz, xyz Outlet, Pacific Sales,
+          Pacific Sales® Outlet, Magnolia® Design Center, xyz Education and xyz
+          Business.
         </p>
         <table className="table text-center my-5">
           <tr>
             <th scope="col">Member Status</th>
             <th scope="col">Standard</th>
-            <th scope="col">
-              My Best Buy Plus™ and My Best Buy Total™ members
-            </th>
+            <th scope="col">My xyz Plus™ and My xyz Total™ members</th>
           </tr>
           <tr>
             <th scope="row">Most products</th>

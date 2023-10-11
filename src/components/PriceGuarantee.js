@@ -86,9 +86,9 @@ function PriceGuarantee() {
             </li>
             <li>
               {" "}
-              Transactions from Best Buy Education, Best Buy Business and from a
-              Best Buy Marketplace store on a third-party website (e.g., Amazon,
-              eBay, Google).{" "}
+              Transactions from xyz Education, xyz Business and from a xyz
+              Marketplace store on a third-party website (e.g., Amazon, eBay,
+              Google).{" "}
             </li>
             <li>
               {" "}

@@ -19,8 +19,8 @@ function ProductRecalls() {
         </a>
         <br />
         <a href="#">
-          Best Buy Recalls Insignia and Yardbird Fire Tables with Lava Rocks Due
-          to Burn and Impact Injury Hazards Recall Alert— Recalled 9/14/2023
+          xyz Recalls Insignia and Yardbird Fire Tables with Lava Rocks Due to
+          Burn and Impact Injury Hazards Recall Alert— Recalled 9/14/2023
         </a>
         <br />
 
@@ -118,41 +118,41 @@ function ProductRecalls() {
         <br />
       </div>
       <div className="border my-5 p-3">
-        <h6>Best Buy recalls</h6>
+        <h6>xyz recalls</h6>
         <a href="#">
-          Best Buy Recalls Insignia and Yardbird Fire Tables with Lava Rocks Due
-          to Burn and Impact Injury Hazards Recall Alert— Recalled 9/14/2023
+          xyz Recalls Insignia and Yardbird Fire Tables with Lava Rocks Due to
+          Burn and Impact Injury Hazards Recall Alert— Recalled 9/14/2023
         </a>
         <br />
         <a href="#">
-          Best Buy Recalls Insignia™ Air Fryers and Air Fryer Ovens Due to Fire
-          and Burn Hazards — Recalled: 4/21/2022
+          xyz Recalls Insignia™ Air Fryers and Air Fryer Ovens Due to Fire and
+          Burn Hazards — Recalled: 4/21/2022
         </a>
         <br />
 
         <a href="#">
-          Best Buy Announces the Recall of Rocketfish Battery Case for iPhone
-          3G/3GS Due to Fire Hazard — Recalled: 11/30/2011
+          xyz Announces the Recall of Rocketfish Battery Case for iPhone 3G/3GS
+          Due to Fire Hazard — Recalled: 11/30/2011
         </a>
         <br />
         <a href="#">
-          Best Buy Announces the Recall of Certain Insignia 26-Inch Flat-Panel
-          LCD Televisions Due to Fire Hazard — Recalled: 4/2/2009
+          xyz Announces the Recall of Certain Insignia 26-Inch Flat-Panel LCD
+          Televisions Due to Fire Hazard — Recalled: 4/2/2009
         </a>
         <br />
         <a href="#">
-          Best Buy Announces the Recall of Certain Rocketfish Universal Portable
+          xyz Announces the Recall of Certain Rocketfish Universal Portable
           Power Sources Due to Fire Hazard — Recalled: 4/2/2009
         </a>
         <br />
         <a href="#">
-          Best Buy branded INIT TV wall mount recalled by Milestone AV
-          Technologies due to risk of injury — Recalled: 1/27/2009
+          xyz branded INIT TV wall mount recalled by Milestone AV Technologies
+          due to risk of injury — Recalled: 1/27/2009
         </a>
         <br />
         <a href="#">
-          Best Buy Recalls Remote Controls Used With Insignia DVD Players Due to
-          Burn Hazard — Recalled: 2/22/2007
+          xyz Recalls Remote Controls Used With Insignia DVD Players Due to Burn
+          Hazard — Recalled: 2/22/2007
         </a>
       </div>
     </div>

@@ -32,16 +32,16 @@ function Services() {
           </button>
         </div>
         <div className="col-4">
-          <h4>Best Buy Support</h4>
+          <h4>xyz Support</h4>
           <p>
-            Have questions about an order or your Best Buy account? Let’s get
-            you to the right place.
+            Have questions about an order or your xyz account? Let’s get you to
+            the right place.
           </p>
           <button
             className="btn w-100"
             style={{ backgroundColor: "white", color: "#1152c2" }}
           >
-            Visit Best Buy Support
+            Visit xyz Support
           </button>
         </div>
       </div>

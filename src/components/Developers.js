@@ -22,21 +22,21 @@ function Developers() {
           <b>Documentation</b>
         </h2>
         <p>
-          Whether you're an API pro, a beginning developer, or a Best Buy
-          partner, our extensive API catalog is waiting for your imagination.
-          Our API suite allows you to query Products, Stores, Categories, and
-          much more. Come on in to explore our data, browse descriptions of our
-          attributes and see examples of working requests and responses.
+          Whether you're an API pro, a beginning developer, or a xyz partner,
+          our extensive API catalog is waiting for your imagination. Our API
+          suite allows you to query Products, Stores, Categories, and much more.
+          Come on in to explore our data, browse descriptions of our attributes
+          and see examples of working requests and responses.
         </p>
         <hr />
         <h2>
           <b>Try our APIs Our Query</b>
         </h2>
         <p>
-          Builder tool helps users get the most out of the Best Buy APIs by
-          creating custom queries. Create a base for your own custom queries or
-          use the Query Builder to access Best Buy API data. You can even
-          customize your responses to better serve your purpose.
+          Builder tool helps users get the most out of the xyz APIs by creating
+          custom queries. Create a base for your own custom queries or use the
+          Query Builder to access xyz API data. You can even customize your
+          responses to better serve your purpose.
         </p>
       </div>
     </div>

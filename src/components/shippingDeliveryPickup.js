@@ -7,9 +7,8 @@ function ShippingDeliveryPickup() {
       <h6>Shipping</h6>
       <p>
         We use these major carriers to ship items: UPS, FedEx and USPS. In
-        select areas we may also use Best Buy employees or these other carriers
-        to ship items: OnTrac, Lone Star Overnight (LSO), Deliv, Shipt, and
-        Roadie.
+        select areas we may also use xyz employees or these other carriers to
+        ship items: OnTrac, Lone Star Overnight (LSO), Deliv, Shipt, and Roadie.
       </p>
       <ul>
         <li>Shipping Costs & Timing</li>
@@ -19,14 +18,14 @@ function ShippingDeliveryPickup() {
         <li>Shipping to Multiple Addresses</li>
         <li>Free Shipping</li>
       </ul>
-      <h4>Best Buy Store Pickup</h4>
+      <h4>xyz Store Pickup</h4>
       <p>
         If you need to pick up an item quickly or change it to shipping, these
         pages can help:
       </p>
       <ul>
-        <li>Best Buy Store Pickup</li>
-        <li>Best Buy Curbside Pickup</li>
+        <li>xyz Store Pickup</li>
+        <li>xyz Curbside Pickup</li>
         <li>How to Change Shipping or Pickup Options After an Order</li>
       </ul>
       <h4>Additional Order Pickup Options</h4>

@@ -1,10 +1,9 @@
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import React, { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";
-import Search from "./Search";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -12,6 +11,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 const PrimaryNavbar = () => {
   const isTokenFound = localStorage.getItem("token");
   const { isLogin } = useSelector((state) => state.auth);
+
+  const searchPattern = /^\s*$/;
 
   const searchProducts = (values) => {
     axios
@@ -48,7 +49,15 @@ const PrimaryNavbar = () => {
               <Formik
                 initialValues={{ keyword: "" }}
                 onSubmit={(values) => {
-                  searchProducts(values.keyword);
+                  if (
+                    values.keyword.length <= 0 ||
+                    searchPattern.test(values.keyword.length)
+                  ) {
+                    navigate("/");
+                  } else {
+                    console.log(values.keyword.length);
+                    searchProducts(values.keyword);
+                  }
                 }}
               >
                 <Form>
@@ -61,6 +70,7 @@ const PrimaryNavbar = () => {
                       padding: "0px 0px 0px 15px",
                       marginTop: "5%",
                       border: "0px",
+                      borderRadius: "1rem 0rem 0rem 1rem",
                     }}
                   />
                   <button
@@ -72,6 +82,7 @@ const PrimaryNavbar = () => {
                       outline: "none",
                       border: "0px",
                       padding: "0px 10px 0px 10px",
+                      borderRadius: "0rem 1rem 1rem 0rem",
                     }}
                   >
                     <AiOutlineSearch
@@ -84,11 +95,11 @@ const PrimaryNavbar = () => {
           </div>
 
           <div className="d-flex">
-            <a href="#" className="btn btn-outline">
+            <Link to="/cart" className="btn btn-outline">
               <BsCart
                 style={{ height: "25px", width: "25px", color: "white" }}
               />
-            </a>
+            </Link>
 
             {!isTokenFound || !isLogin ? (
               <div className="text-white">
@@ -129,10 +140,10 @@ const PrimaryNavbar = () => {
                   >
                     <NavDropdown.Item className="border-bottom">
                       <Link
-                        to="/dashboard"
+                        to="/user"
                         style={{ textDecoration: "none", color: "black" }}
                       >
-                        Dashboard
+                        Profile
                       </Link>
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleLogout}>

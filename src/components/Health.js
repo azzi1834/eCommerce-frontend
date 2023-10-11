@@ -3,15 +3,14 @@ import React from "react";
 function Health() {
   return (
     <div className="container my-3 p-3">
-      <h5>Best Buy Health</h5>
+      <h5>XYZ Health</h5>
       <div className="row border p-2">
         <div className="col-7 p-5">
           <h2>
-            Best Buy Health™ meets you at the intersection of health and
-            technology.
+            xyz Health™ meets you at the intersection of health and technology.
           </h2>
           <p>
-            Best Buy Health is here to help enable care and support personal
+            xyz Health is here to help enable care and support personal
             connections using our world-class omnichannel capabilities,
             distribution and logistics, strong analytics, in-home services, and
             compassionate Caring Center call specialists.
@@ -46,7 +45,7 @@ function Health() {
           </p>
         </div>
         <div className="col-6">
-          <img src="https://pisces.bbystatic.com/image2/BestBuy_US/Gallery/socialwork_v2_mainpage_sol67850_der-185988.jpg;maxHeight=305;maxWidth=390"></img>
+          <img src="https://pisces.bbystatic.com/image2/xyz_US/Gallery/socialwork_v2_mainpage_sol67850_der-185988.jpg;maxHeight=305;maxWidth=390"></img>
         </div>
       </div>
 
@@ -67,7 +66,7 @@ function Health() {
           </p>
         </div>
         <div className="col-6">
-          <img src="https://pisces.bbystatic.com/image2/BestBuy_US/Gallery/call_center_mainpage_sol67850_der-185643.jpg;maxHeight=305;maxWidth=390"></img>
+          <img src="https://pisces.bbystatic.com/image2/xyz_US/Gallery/call_center_mainpage_sol67850_der-185643.jpg;maxHeight=305;maxWidth=390"></img>
         </div>
       </div>
 
@@ -83,7 +82,7 @@ function Health() {
           </p>
         </div>
         <div className="col-6">
-          <img src="https://pisces.bbystatic.com/image2/BestBuy_US/Gallery/senior_guitar_mainpage_sol67850_der-185654.jpg;maxHeight=305;maxWidth=390"></img>
+          <img src="https://pisces.bbystatic.com/image2/xyz_US/Gallery/senior_guitar_mainpage_sol67850_der-185654.jpg;maxHeight=305;maxWidth=390"></img>
         </div>
       </div>
     </div>

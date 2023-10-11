@@ -92,7 +92,7 @@ function Products() {
           <h3>Don't miss out on the best deals</h3>
           <p>
             Unlock even more exclusive member deals when you become a My Best
-            Buy Plus™ or My Best Buy Total™ member.
+            Buy Plus™ or My xyz Total™ member.
           </p>
         </div>
 

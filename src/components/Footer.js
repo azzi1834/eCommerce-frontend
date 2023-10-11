@@ -32,16 +32,15 @@ function Footer() {
               <h6>Partnerships</h6>
               <a href="/affilate-program">Affilate Program</a>
               <a href="/developers">Developers</a>
-              <a href="/health">Best Buy Health</a>
-              <a href="/education">Best Buy Education</a>
+              <a href="/health">xyz Health</a>
+              <a href="/education">xyz Education</a>
             </div>
           </div>
           <hr />
           <p>
             In-store pricing may vary. Prices and offers are subject to change.
-            © 2023 Best Buy. All rights reserved. BEST BUY, the BEST BUY logo,
-            the tag design, and MY BEST BUY are trademarks of Best Buy and its
-            affiliated companies.
+            © 2023 xyz. All rights reserved. xyz, the xyz logo, the tag design,
+            and MY xyz are trademarks of xyz and its affiliated companies.
           </p>
         </div>
         <div className="col-3">

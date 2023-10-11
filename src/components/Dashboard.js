@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
+import React, { useState } from "react";
 import Profile from "./personalDetails";
 import AddressBook from "./AddressBook";
 

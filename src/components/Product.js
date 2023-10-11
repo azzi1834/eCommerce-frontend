@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Carousel } from "react-bootstrap";
 import Review from "./Review";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Product() {
   const { id } = useParams(); //return obj in key/value pair
@@ -17,6 +20,29 @@ function Product() {
       });
   };
 
+  const addToCart = async (values) => {
+    const token = localStorage.getItem("token");
+    console.log("values", values);
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/api/cart/${id}/add-to-cart`,
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // console.log("response", response.data);
+      toast(response.data);
+    } catch (error) {
+      // console.log(error.message);
+      toast(error.message);
+    }
+  };
+
   useEffect(() => {
     getProduct();
   }, []);
@@ -24,6 +50,7 @@ function Product() {
   return (
     <>
       <div className="container">
+        <ToastContainer />
         <div className="row">
           <div className="col-6 ">
             <Carousel data-bs-theme="dark" indicators={false}>
@@ -56,7 +83,17 @@ function Product() {
               <b>price: </b>${product?.data?.dataValues?.price}
             </p>
             <div>
-              <button className="btn btn-primary w-40">Add to cart</button>
+              <li
+                onClick={() => {
+                  addToCart({
+                    quantity: 1,
+                    price: product?.data?.dataValues?.price,
+                  });
+                }}
+                className="btn btn-primary w-40"
+              >
+                Add to cart
+              </li>
               <button className="btn btn-primary w-40 mx-2">whishlist</button>
             </div>
           </div>

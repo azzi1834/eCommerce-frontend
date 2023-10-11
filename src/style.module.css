@@ -93,13 +93,17 @@
 }
 
 .activeItem{
-background-color: #2A9060;
+background-color: #0046BE;
 border-radius: 2px;
 }
 
 
 .activeItem a {
     color: white;
+}
+
+.activeItem :hover{
+    background-color: #0046BE !important;
 }
 
 .iconSize{
