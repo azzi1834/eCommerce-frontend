@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 function Product() {
   const { id } = useParams(); //return obj in key/value pair
   const [product, setProduct] = useState([]);
+  const [quantity, setQuantity] = useState(1);
   // const [product, setProduct] = useState([]);
 
   const getProduct = async () => {
@@ -40,6 +41,18 @@ function Product() {
     } catch (error) {
       // console.log(error.message);
       toast(error.message);
+    }
+  };
+
+  const incrementQuantity = () => {
+    if (quantity < 5) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     }
   };
 
@@ -80,21 +93,43 @@ function Product() {
 
             <p>{product?.data?.dataValues?.description}</p>
             <p>
-              <b>price: </b>${product?.data?.dataValues?.price}
+              <b>price: </b>Rs. {product?.data?.dataValues?.price}
             </p>
-            <div>
+
+            <div className="col-md-3 d-flex align-items-center">
+              <button
+                className="btn btn-outline-primary rounded-0"
+                onClick={incrementQuantity}
+              >
+                +
+              </button>
+              <input
+                className="text-center form-control rounded-0"
+                value={quantity}
+              ></input>
+
+              <button
+                disabled={quantity < 2}
+                onClick={decrementQuantity}
+                className="btn btn-outline-primary rounded-0"
+              >
+                -
+              </button>
+            </div>
+
+            <div className="my-3">
               <li
                 onClick={() => {
                   addToCart({
-                    quantity: 1,
+                    quantity,
                     price: product?.data?.dataValues?.price,
                   });
                 }}
-                className="btn btn-primary w-40"
+                className="btn btn-primary rounded-0"
               >
                 Add to cart
               </li>
-              <button className="btn btn-primary w-40 mx-2">whishlist</button>
+              <li className="btn btn-primary mx-2 rounded-0">whishlist</li>
             </div>
           </div>
         </div>

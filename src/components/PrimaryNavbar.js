@@ -1,12 +1,13 @@
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BsCart } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import { AiOutlineSearch } from "react-icons/ai";
+import { Badge } from "@mui/material";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const PrimaryNavbar = () => {
   const isTokenFound = localStorage.getItem("token");
@@ -95,10 +96,13 @@ const PrimaryNavbar = () => {
           </div>
 
           <div className="d-flex">
-            <Link to="/cart" className="btn btn-outline">
-              <BsCart
-                style={{ height: "25px", width: "25px", color: "white" }}
-              />
+            <Link to="/cart" className="btn">
+              <Badge badgeContent={4} color="primary">
+                <ShoppingCartOutlinedIcon
+                  color="white"
+                  style={{ color: "white", height: "30px", width: "30px" }}
+                />
+              </Badge>
             </Link>
 
             {!isTokenFound || !isLogin ? (

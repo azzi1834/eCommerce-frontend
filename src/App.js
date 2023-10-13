@@ -25,6 +25,7 @@ import Developers from "./components/Developers";
 import Health from "./components/Health";
 import Education from "./components/Education";
 import Cart from "./components/CartPage";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
         <Route path="/education" element={<Education />}></Route>
 
         <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
       </Routes>
 
       <Footer />

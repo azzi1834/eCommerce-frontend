@@ -60,18 +60,6 @@ export const register = (formData) => {
           console.log("error::", error.message);
           console.log("error::", error.response.request.status);
         });
-
-      // localStorage.setItem("token", response?.data?.token);
-
-      // const errorData = response;
-      // throw new Error(errorData.message || "Login failed");
-
-      // if (response.status === 200) {
-      // dispatch(registerSuccess(response));
-      // } else {
-      //   dispatch(registerFailure("REGISTRATION FAILED TRY AGAIN!"));
-      //   // throw new Error(response.message || "REGISTER failed");
-      // }
     } catch (error) {
       console.log("error", error);
       dispatch(registerFailure(error.message));

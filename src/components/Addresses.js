@@ -1,17 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Styles from "../dashboard.module.css";
 import { IoMdAdd } from "react-icons/io";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Addresses() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [data, setData] = useState([]);
-  console.log("data", data);
+  const token = localStorage.getItem("token");
 
-  console.log(isSubmitted);
+  const getAddresses = async () => {
+    const response = await axios.get(
+      "http://localhost:4000/api/user/get-addresses",
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("got data", response.data);
+    setData(response.data);
+  };
+
+  const saveAddress = async (formData) => {
+    const response = await axios.post(
+      "http://localhost:4000/api/user/save-address",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 200) {
+      toast("saved succesfully ");
+      setData(response.data);
+    }
+  };
+
+  useEffect(() => {
+    getAddresses();
+  }, []);
+
   return (
     <>
       <div className="p-3">
+        <ToastContainer />
         <h4>
           <strong>Addresses</strong>
         </h4>
@@ -31,13 +71,10 @@ function Addresses() {
                   return (
                     <div className="card my-3 p-3 d-flex flex-row justify-content-between">
                       <div>
-                        <h4>
-                          {dta?.first_name}
-                          {dta?.country}
-                        </h4>
-                        <p>{dta?.phone_number}</p>
+                        <h6>{dta?.name}</h6>
+                        <p>{dta?.contactNumber}</p>
                         <p>
-                          {dta?.province} {dta?.postal_code}
+                          {dta?.address} {dta?.city} {dta?.province}
                         </p>
                       </div>
                       <div>
@@ -64,48 +101,42 @@ function Addresses() {
               </div>
             </li>
           ) : (
-            <div className="container p-3 border">
+            <div className="container p-3">
               <h6>Add a new address</h6>
               <Formik
                 onSubmit={(formData) => {
-                  setData((prevData) => [...prevData, formData]);
+                  console.log("formData", formData);
+                  saveAddress(formData);
+                  // setData((prevData) => [...prevData, formData]);
                   setIsSubmitted(false);
                 }}
                 initialValues={{
-                  first_name: "",
-                  last_name: "",
-                  phone_number: "",
-                  address: "",
-                  city: "",
+                  name: "",
+                  number: "",
                   province: "",
-                  postal_code: "",
-                  country: "",
+                  city: "",
+                  address: "",
+                  addressType: "",
                 }}
                 validate={(values) => {
                   const errors = {};
-                  if (!values.first_name) {
-                    errors.first_name = "Required";
+                  if (!values.name) {
+                    errors.name = "Required";
                   }
-                  if (!values.last_name) {
-                    errors.last_name = "Required";
-                  }
-                  if (!values.phone_number) {
-                    errors.phone_number = "Required";
-                  }
-                  if (!values.address) {
-                    errors.address = "Required";
-                  }
-                  if (!values.city) {
-                    errors.city = "Required";
+                  if (!values.number) {
+                    errors.number = "Required";
                   }
                   if (!values.province) {
                     errors.province = "Required";
                   }
-                  if (!values.postal_code) {
-                    errors.postal_code = "Required";
+                  if (!values.city) {
+                    errors.city = "Required";
                   }
-                  if (!values.country) {
-                    errors.country = "Required";
+                  if (!values.address) {
+                    errors.address = "Required";
+                  }
+                  if (!values.addressType) {
+                    errors.addressType = "Required";
                   }
 
                   return errors;
@@ -113,44 +144,64 @@ function Addresses() {
               >
                 {({ isSubmitting }) => (
                   <Form>
-                    <div className="container">
+                    <div className="container border p-3">
                       <div className="row">
-                        <div className="col-6">
+                        <div className="col-6 p-2">
                           <div className="form-group">
-                            <label>First Name</label>
+                            <label>Full Name</label>
                             <br />
                             <Field
                               type="text"
                               className="form-control"
-                              name="first_name"
+                              name="name"
                             />
-                            <ErrorMessage name="first_name" component="div" />
-                          </div>
-                        </div>
-                        <div className="col-6">
-                          <div className="form-group">
-                            <label>Last Name</label>
-                            <br />
-                            <Field
-                              type="text"
-                              name="last_name"
-                              className="form-control"
+                            <ErrorMessage
+                              style={{ color: "red" }}
+                              name="name"
+                              component="div"
                             />
-                            <ErrorMessage name="last_name" component="div" />
                           </div>
-                        </div>
-                        <div className="col-6 mt-2">
                           <div className="form-group">
                             <label>Phone Number</label>
                             <Field
                               type="tel"
-                              name="phone_number"
+                              name="number"
                               className="form-control"
                             />
-                            <ErrorMessage name="phone_number" component="div" />
+                            <ErrorMessage
+                              style={{ color: "red" }}
+                              name="number"
+                              component="div"
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label>Province</label>
+                            <Field
+                              type="tel"
+                              name="province"
+                              className="form-control"
+                            />
+                            <ErrorMessage
+                              style={{ color: "red" }}
+                              name="province"
+                              component="div"
+                            />
                           </div>
                         </div>
-                        <div className="col-12 mt-2">
+                        <div className="col-6 p-2">
+                          <div className="form-group">
+                            <label>City</label>
+                            <Field
+                              type="text"
+                              name="city"
+                              className="form-control"
+                            />
+                            <ErrorMessage
+                              style={{ color: "red" }}
+                              name="city"
+                              component="div"
+                            />
+                          </div>
                           <div className="form-group">
                             <label>Address</label>
                             <Field
@@ -158,75 +209,53 @@ function Addresses() {
                               name="address"
                               className="form-control"
                             />
-                            <ErrorMessage name="address" component="div" />
-                          </div>
-                        </div>
-                        <div className="col-6">
-                          <div className="form-group mt-2">
-                            <label>City</label>
-                            <Field
-                              type="text"
-                              name="city"
-                              className="form-control"
+                            <ErrorMessage
+                              style={{ color: "red" }}
+                              name="address"
+                              component="div"
                             />
-                            <ErrorMessage name="city" component="div" />
                           </div>
-                        </div>
-                        <div className="col-3">
-                          <div className="form-group mt-2">
-                            <label>Province</label>
+                          <div className="dropdown">
                             <Field
                               as="select"
-                              name="province"
-                              className="form-control"
+                              name="addressType"
+                              className="form-select mt-4"
                             >
-                              <option value="Alberta">Alberta</option>
-                              <option value="BritishColumbia">
-                                British Columbia
+                              <option value="" disabled selected>
+                                Select Address Type
                               </option>
-                              <option value="Manitoba">Manitoba</option>
-                              <option value="Nunavt">Nunavt</option>
-                              <option value="Ontario">Ontario</option>
-                              <option value="Quebec">Quebec</option>
-                              <option value="Yukon">Yukon</option>
-                              <option value="Saskatchewan">Saskatchewan</option>
-                              <option value="NovaScotia">Nova Scotia</option>
-                            </Field>
-                            <ErrorMessage name="province" component="div" />
-                          </div>
-                        </div>
-                        <div className="col-3">
-                          <div className="form-group mt-2">
-                            <label>Postal Code</label>
-                            <Field
-                              type="text"
-                              className="form-control"
-                              name="postal_code"
-                            />
-                            <ErrorMessage name="postal_code" component="div" />
-                          </div>
-                        </div>
-                        <div className="col-4">
-                          <div className="form-group mt-2">
-                            <label>Country</label>
-                            <Field
-                              type="text"
-                              className="form-control"
-                              name="country"
-                            />
-                            <ErrorMessage name="country" component="div" />
-                          </div>
-                        </div>
 
-                        <div>
-                          <button
-                            type="submit"
-                            className="btn btn-primary mt-2"
-                            disabled={isSubmitting}
-                          >
-                            Submit
-                          </button>
+                              <option value="shipping_address">
+                                Shipping Address
+                              </option>
+                              <option value="billing_address">
+                                Billing Address
+                              </option>
+                            </Field>
+                            <ErrorMessage
+                              style={{ color: "red" }}
+                              name="addressType"
+                              component="div"
+                            />
+                          </div>
                         </div>
+                      </div>
+                      <div className="text-end">
+                        <li
+                          onClick={() => {
+                            setIsSubmitted(false);
+                          }}
+                          className="btn btn-outline-dark mx-2 mt-2 rounded-0"
+                        >
+                          Cancel
+                        </li>
+                        <button
+                          type="submit"
+                          className="btn btn-primary mt-2 rounded-0"
+                          disabled={isSubmitting}
+                        >
+                          Save
+                        </button>
                       </div>
                     </div>
                   </Form>

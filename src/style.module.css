@@ -123,3 +123,14 @@ border-radius: 2px;
 background-color: #0044C0;
 color: white;
 }
+
+.checkoutForm input, select{
+    height: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.itemsSection{
+    max-height: 210px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
